@@ -303,18 +303,6 @@ export const useSupabaseDoctors = () => {
           .eq('verified', true)
           .order('last_name', { ascending: true });
         setError(null);
-      } catch (err: unknown) {
-        const error = err as SupabaseError;
-        console.error('Error fetching doctors:', error);
-        
-        if (error.message?.includes('Could not find the table')) {
-          setError('Doctors table not created yet - Please run the migration first');
-              } catch (err: unknown) {
-        const error = err as SupabaseError;
-        console.error('Error fetching doctors:', error);
-        
-        if (error.message?.includes('Could not find the table')) {
-          setError('Doctors table not created yet - Please run the migration first');
         } else {
           setError(error.message || 'Unknown error fetching doctors');
         }
@@ -322,8 +310,6 @@ export const useSupabaseDoctors = () => {
       } finally {
         setLoading(false);
       }
-          };
-    }
 
     fetchDoctors();
   }, []);
