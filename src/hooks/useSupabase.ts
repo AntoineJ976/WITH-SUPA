@@ -309,7 +309,7 @@ export const useSupabaseDoctors = () => {
         
         if (error.message?.includes('Could not find the table')) {
           setError('Doctors table not created yet - Please run the migration first');
-      } catch (err: unknown) {
+              } catch (err: unknown) {
         const error = err as SupabaseError;
         console.error('Error fetching doctors:', error);
         
@@ -322,7 +322,8 @@ export const useSupabaseDoctors = () => {
       } finally {
         setLoading(false);
       }
-    };
+          };
+    }
 
     fetchDoctors();
   }, []);
