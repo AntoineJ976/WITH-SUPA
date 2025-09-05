@@ -8,7 +8,13 @@ export const isSupabaseConfigured = (): boolean => {
   return !!(url && anonKey && url.startsWith('https://') && anonKey.length > 0)
 }
 
-export const supabase = createClient(
-  import.meta.env.VITE_SUPABASE_URL!,
-  import.meta.env.VITE_SUPABASE_ANON_KEY!
-)
+// Only create Supabase client if properly configured
+export const supabase = (() => {
+  if (isSupabaseConfigured()) {
+    return createClient(
+      import.meta.env.VITE_SUPABASE_URL!,
+      import.meta.env.VITE_SUPABASE_ANON_KEY!
+    )
+  }
+  return null
+})()
